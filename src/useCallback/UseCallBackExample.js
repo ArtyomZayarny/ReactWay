@@ -1,5 +1,20 @@
-import React, { useState, useCallback } from 'react'
-import List from './List';
+import React, { useState, useCallback, useEffect } from 'react'
+
+
+
+const List = ({ getItems }) => {
+    const [items, setItems] = useState([]);
+
+
+    useEffect(() => {
+        setItems(getItems());
+        console.log('update items')
+
+    }, [getItems])
+
+
+    return items.map(item => <div key={item}><h2 style={{ color: '#fff' }}>{item}</h2></div>)
+}
 
 export default function UseCallbackExample(props) {
     const [theme, setTheme] = useState('dark');
@@ -13,8 +28,10 @@ export default function UseCallbackExample(props) {
         }
     }
     const getItems = useCallback(() => {
-        return [number, number + 1, number + 2]
+        return [number, number + 1, number + 2];
     }, [number]);
+
+
     return (
         <div style={themeColor(theme)}>
             <input

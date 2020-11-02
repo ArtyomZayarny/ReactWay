@@ -11,20 +11,17 @@ export default function UseMemoExample(props) {
     const [theme, setTheme] = useState(false);
 
 
-    const doubleNUmber = useMemo(() => { return slowFunction(number) }, [number])
+    const doubleNUmber = useMemo(() => slowFunction(number), [number]);
 
-    const themeColor = useMemo(() => {
-        let color = theme ? '#c3c3c3' : '#282c34';
-        return {
-            'backgroundColor': color,
-            'padding': 40
-        }
-    }, [theme]);
+    const themeColor = {
+        'backgroundColor': useMemo(() => { return theme ? '#c3c3c3' : '#282c34' }, [theme]),
+        'padding': 40
+    }
+
 
     useEffect(() => {
         console.log('Theme is change')
-
-    }, [themeColor]);
+    }, [themeColor.backgroundColor]);
 
     return (
         <>
@@ -35,7 +32,7 @@ export default function UseMemoExample(props) {
                     onChange={(e) => { setNumber(parseInt(e.target.value)) }}
                 />
                 <button onClick={() => { setTheme(!theme) }}>toggle theme</button>
-                <h2>{doubleNUmber}</h2>
+                <h2 style={{ "color": '#fff' }}>{doubleNUmber}</h2>
             </div>
         </>
     )
