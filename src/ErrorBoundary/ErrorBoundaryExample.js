@@ -10,9 +10,11 @@ export default function ErrorBoundaryExample(props) {
             <ErrorBoundary>
                 <Counter />
             </ErrorBoundary>
+
             <ErrorBoundary>
                 <Counter />
             </ErrorBoundary>
+
             <ErrorBoundary>
                 <Counter />
             </ErrorBoundary>
